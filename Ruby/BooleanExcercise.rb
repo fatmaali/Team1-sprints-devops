@@ -1,5 +1,4 @@
-
-   
+#1.
     num1=1
     num2=1
     num3=1
@@ -9,12 +8,8 @@
     p "same" if (diff1).abs == (diff2).abs
     p "diff" if (diff1).abs != (diff2).abs
 
-
-# B.Write a Ruby program to check three given integers 
-#a, b, c and return true if one of b or c is close (difference out of a by at most 1)
-#, while the other is far, difference from bothother values by 3 or more.
-
-def diff1andLess3orMore(a,b,c)
+#2.
+def diff1Check(a,b,c)
     diff1 = a-b
     diff2 = b-c
     if(!(diff1.abs > 2)&& !(diff2.abs > 2) )
@@ -28,11 +23,9 @@ def diff1andLess3orMore(a,b,c)
     end
 end
 
-p diff1andLess3orMore(1,2,7)
+p diff1Check(1,2,7)
 
-# C.Write a Ruby program to check two given integers,
-# each in the range 10..99, return true if there is a digit that appears in both numbers.
-
+#3
 def checkDigits(fst,sec)
     strFst = fst.to_s
     strSec = sec.to_s
@@ -47,22 +40,20 @@ end
 
 p checkDigits(91,81)
 
-# D.Write a Ruby program to check two given integers and 
-#return true if either one is 11 or their sum or difference is 11 otherwise return false.
 
-def checkEleven(fst,sec)
+#4.
+def diffCheck(fst,sec)
     if(fst == 11 || sec == 11 || (fst-sec).abs == 11 || (fst+sec) == 11)
         return true
     end
     return false
 end
 
-p checkEleven(10,1)
+p diffCheck(10,1)
 
-# E.Write a Ruby program to check whether 2 strings start and end with 
-#different letters and both of them doesn’t include letter “x”.
 
-def checkEleven(fst,sec)
+#5.
+def checkeven(fst,sec)
     if(fst.include?("x") || sec.include?("x"))
         return false
     end
@@ -75,28 +66,20 @@ def checkEleven(fst,sec)
     return true
 end
 
-p checkEleven("sqes","saa")
+p checkeven("sqes","saa")
 
 
-# F.Write a Ruby program that checks whether a string contains a vowel.
+#6.
 
-def hasVouel(inputStr)
-    inputStr.split("").intersection(["a","e","i","o","u","y"]).size > 0
-end
+   
+   check=("www").split("").intersection(["a","e","i","o","u","y"]).size > 0 
+   if(check)
+    p "vowel"
+   else 
+    p " not vowel"
+   end
 
-p hasVouel("kkkqqqqe")
-
-# G.Write a Ruby program that keeps getting an integer at the console less 
-#than 100 scorefrom the user, and exists when he inserts -1.
-#If he inserted a number out of range, print the message :”Please insert a score from 0 to100”.
-#Your program shall print out the corresponding evaluation as follows:
-# 0-49:fail.
-# 50-60:pass
-# 60-70:good
-# 70-80:very good
-# 80-90:excellent
-# 90-100:incredible
-
+#7.
 def scoreRange(score)
     if(score >= 0 || score < 50)
         return "fail"

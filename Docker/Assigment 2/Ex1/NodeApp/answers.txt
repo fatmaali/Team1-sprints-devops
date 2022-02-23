@@ -1,0 +1,4 @@
+1- Create volume
+docker volume create hello
+2-mount the volume in container to
+sudo docker run -d   --name devtest2 -p 80:9999  -v hello:/usr/src/app   img1/node-web-app

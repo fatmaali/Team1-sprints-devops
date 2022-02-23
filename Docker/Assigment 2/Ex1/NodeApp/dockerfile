@@ -1,0 +1,12 @@
+FROM node
+
+WORKDIR source
+ 
+RUN apt-get update
+RUN apt-get install -y npm
+
+COPY . .
+
+EXPOSE 80
+CMD [ "node", "server.js" ]
+

@@ -7,10 +7,10 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 # where available (npm@5+)
 COPY package*.json ./
-COPY docker-entrypoint.sh /usr/local/bin
+#COPY docker-entrypoint.sh /usr/local/bin
 
 #ENTRYPOINT ["docker-entrypoint.sh"]
-RUN chmod 777 /usr/local/bin/docker-entrypoint.sh && ln -s /usr/local/bin/docker-entrypoint.sh 
+#RUN chmod 777 /usr/local/bin/docker-entrypoint.sh && ln -s /usr/local/bin/docker-entrypoint.sh 
 RUN npm install
 RUN apt update && apt install -y mysql
 #RUN docker-machine env

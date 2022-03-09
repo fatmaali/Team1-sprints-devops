@@ -1,21 +1,6 @@
-pipeline {
-    agent any
-
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-            }
-        }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
+node {
+    stage('listing repo files') {
+        git branch: "${GIT_BRANCH}", credentialsId: 'git_hub_token',  url:'https://github.com/fatmaali/Team2-sprints-devops.git'
+        bat "dir"
     }
 }

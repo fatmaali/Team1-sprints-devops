@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: bee-pod
+  labels:
+    app: bee-pod
+
+spec:
+  containers:
+    - name: bee-container
+      image: nginx
+  tolerations:
+  - key: "spray"
+    value: "mortein"
+    effect: "NoSchedule"

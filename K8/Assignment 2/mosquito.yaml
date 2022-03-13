@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mosquito-pod
+  labels:
+    app: mosquito-pod
+
+spec:
+  containers:
+    - name: mosquito-container
+      image: nginx

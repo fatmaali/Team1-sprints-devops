@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+  labels: 
+    tier: dep2
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: my-app2
+  template:
+    metadata:
+      labels:
+        app: my-app2
+    spec:
+      containers:
+      - name: q11-container
+        image: nginx
+      affinity:
+       podAffinity:
+       requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: color
+            operator: Equals
+            values:
+            - blue
+            topologyKey: topology.kubernetes.io/zone
+            

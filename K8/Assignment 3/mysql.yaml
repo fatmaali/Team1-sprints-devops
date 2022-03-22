@@ -1,0 +1,9 @@
+kind: Pod 
+apiVersion: v1 
+metadata:
+  name: mysqlpod
+spec:
+  containers:
+    - name: mysql
+      image: mysql:5.7
+

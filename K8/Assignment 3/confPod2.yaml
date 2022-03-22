@@ -1,0 +1,18 @@
+kind: Pod 
+apiVersion: v1 
+metadata:
+  name: sql
+spec:
+  containers:
+    - name: sql-container
+      image: nginx:1.7.9 
+      env:
+       - name: MYSQL_ROOT_PASSWORD
+         valueFrom:
+           secretKeyRef:
+              name: sec
+              key: MYSQL_ROOT_PASSWORD
+      envFrom:
+        - configMapRef:
+            name: webapp-config-map
+

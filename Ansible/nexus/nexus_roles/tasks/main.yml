@@ -1,0 +1,90 @@
+---
+# - name: "update yum"
+#   yum:
+- name: "install wget"
+  yum:
+    name: "wget"
+    state: "present"
+    update_cache: yes
+
+- name: "install java-1.8.0"
+  yum:
+    name: "java-1.8.0-openjdk.x86_64"
+    state: "present"  
+# tasks file for nexus
+- name: "create dir"
+  file:
+    path: "{{ dir }}"
+    state: "directory" 
+    mode: '777'
+    owner: ec2-user
+    recurse: true
+
+- name: "download nexus"
+  ansible.builtin.get_url: 
+       dest: "{{ dir }}/nexus.tar.gz"
+       url: "https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
+
+
+# - name: "Download nexus"
+#   action: "shell sudo wget -O {{ dir }}/nexus.tar.gz https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
+
+# - name: Give insecure permissions to an existing file
+#   ansible.builtin.file:
+#     path: '{{ dir }}'
+
+- name: "unarchive"
+  ansible.builtin.unarchive:
+    dest: '{{ dir }}/'
+    src: '{{ dir }}/nexus.tar.gz'
+    remote_src: yes
+
+- name: "rename nexus 3"
+  action: "shell mv {{ dir }}/nexus-3* {{ dir }}/nexus"
+
+
+- name: "add nexus user"
+  ansible.builtin.user:
+    name: "nexus"
+    state: "present"
+
+
+- name: "change nexus folder permissions"
+  file: 
+    path: "{{ dir }}/nexus"
+    state: "directory"
+    owner: "nexus"
+    group: "nexus"
+    recurse: true
+
+
+- name: "change sonatype-work folder permissions"
+  file: 
+    path: "{{ dir }}/sonatype-work"
+    state: "directory"
+    owner: "nexus"
+    group: "nexus"
+    recurse: true
+
+
+- name: "make 'run_as_user' value = nexus"
+  replace:
+    path: "{{ dir }}/nexus/bin/nexus.rc"
+    regexp: '#run_as_user=""'
+    replace: 'run_as_user="nexus"'
+    # backup: yes
+
+
+- name: "copy nexus service config template file"
+  template:
+    src: "nexus_service_config"
+    dest: "/etc/systemd/system/nexus.service"
+
+
+- name: "start nexus service"
+  ansible.builtin.service:
+    name: "nexus"
+    state: started
+    enabled: yes
+
+

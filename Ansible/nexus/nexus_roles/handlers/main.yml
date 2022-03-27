@@ -1,0 +1,24 @@
+---
+- name: "rename"
+  action: "shell mv {{ dir }}/nexus-3* {{ dir }}/nexus"
+
+# - name: Find
+#   find:
+#     paths: "{{ dir }}"
+#     patterns: 'nexus-3*'
+#     recurse: yes
+#   register: finded_file
+# - name: de
+#   debug:
+#     msg: "{{ finded_file.files }}"
+# - name: Copy
+#   ansible.builtin.copy:
+#     remote_src: true
+#     src: "{{ finded_file.files[0].path }}"
+#     dest: "{{ dir }}/nexus"
+# - name: Remove
+#   ansible.builtin.file:
+#     path: "{{ dir }}/nexus-3*"
+#     state: absent
+
+# handlers file for nexus
